@@ -1,0 +1,133 @@
+
+
+schema:Employee
+
+field(Name,Postion,office,Age,start_date,Salary)
+
+
+from django.db import models
+
+
+class Employee(models.Model):
+
+   name=models.CharField(max_length=200)
+
+   postion=models.CharField(max_length=200)
+
+   office=models.CharField(max_length=200)
+
+   age=models.PositiveIntegerField()
+
+   start_date=models.dateField()
+
+   Salary=models.PositiveIntegerField()
+
+
+
+ q1> query for adding new records 
+
+
+ Employee.object,create(
+                         id="1"
+                         name="dinu"
+                         postion="qa"
+                         office="malta"
+                         Salary="25000000"
+                         start_date=Date(14-06-2024)
+                         age=24,
+                      )
+
+q2> query from updating an employee record
+
+
+Employee.object.filter(id=1).update(Salary=60000,office="uae")
+
+
+q3>query for filitering an employee with age and Salary
+
+
+qs>=Employee.object.filter(age=40,salary=50000)
+
+
+q4>query for deleting employee record
+
+
+   Employee.object.filter(id=1).delete()
+
+
+q5> employee withj salary>25000
+
+
+ qs>Employee.object.filter(salary__gte=25000)
+
+
+q6> filitering employees with office tokyo
+
+
+qs>Employee.object.filter(office=tokyo)
+
+
+q7>query for fecthing all records
+
+
+qs> Employee.object.all()
+
+
+q8>employees with salaray in range of 25k to 50k
+
+
+qs>Employee.object.filter(salary__gte=25000,salray__lte=50000)
+
+
+q9>sort employee wrt salary order by asc
+
+
+qs=Employee.object.all().order_by("salary")#asc
+
+
+qs=Employee.object.all().order_by("salary")#desc
+
+
+qs=Employee.object.all().order_by("age")
+
+
+q10>employee with highest salary
+
+
+max_salary=Employee.object.all().values("salary").aggreagate(salary=max("salary"))
+
+
+min_salary=Employee.object.all().values("salary").aggreagate(salary=min("salary"))
+
+#aggreagateFunctions
+
+#count(),max(),min(),sum(),avg()
+
+
+q11> group employee wrt office
+
+
+office_summary=Employee.object.all().values("office").annoatete(cnt=count("office"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
